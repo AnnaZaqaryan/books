@@ -1,0 +1,11 @@
+.header {
+  min-height: 40px;
+  width: 100%;
+  background: #D2691E;
+}
+.header__logo {
+  padding: 10px 15px;
+  font-style: italic;
+  color: #343a40;
+}
+

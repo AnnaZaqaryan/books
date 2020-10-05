@@ -1,0 +1,80 @@
+<div>
+  <button pButton type="button" label="Add book" (click)="showAddBookDialog()"></button>
+  <p-dialog header="Add book" [(visible)]="displayNewBook">
+
+    <h6 for="float-input">Title</h6>
+    <input required name="title" id="title" type="text" pInputText 
+    #title="ngModel"
+    [(ngModel)]="currentBook.title">
+
+    <div *ngIf="title.invalid" class="req-text">
+        Required
+    </div>
+
+    <h6>Author</h6>
+    <input id="author" type="text" pInputText [(ngModel)]="currentBook.author">
+    
+
+    <h6>Price</h6>
+    <p-inputNumber [(ngModel)]="currentBook.price"></p-inputNumber>
+
+    <ng-template pTemplate="footer">
+      <p-button *ngIf="!title.invalid" icon="pi pi-check" (click)="saveNewBook()" label="Save" class="p-button-text"></p-button>
+      <p-button *ngIf="title.invalid" icon="pi pi-check" label="Save" class="p-button-text"></p-button>
+    </ng-template>
+  </p-dialog>
+
+
+  <p-dialog header="Edit book" [(visible)]="displayEditBook">
+
+
+    <h6>Title</h6>
+    <input required name="title" id="title" type="text" pInputText 
+    #title="ngModel"
+    [(ngModel)]="currentBook.title">
+
+    <div *ngIf="title.invalid" class="req-text">
+        Required
+    </div>
+
+
+    <h6>Author</h6>
+    <input id="float-input" type="text" pInputText [(ngModel)]="currentBook.author">
+
+    <h6>Price</h6>
+    <p-inputNumber [(ngModel)]="currentBook.price"></p-inputNumber>
+
+    
+    <ng-template pTemplate="footer">
+      <p-button  *ngIf="!title.invalid" icon="pi pi-check" (click)="updateBook()" label="Save" class="p-button-text"></p-button>
+      <p-button  *ngIf="title.invalid" icon="pi pi-check" label="Save" class="p-button-text"></p-button>
+    </ng-template>
+  </p-dialog>
+
+
+
+
+
+  <p-table [value]="books">
+    <ng-template pTemplate="header">
+      <tr>
+        
+        <th pSortableColumn="title">Title <p-sortIcon field="book.title"></p-sortIcon></th>
+        <th pSortableColumn="author">Author <p-sortIcon field="book.author"></p-sortIcon></th>
+        <th pSortableColumn="price">Price <p-sortIcon field="book.price"></p-sortIcon></th>
+        <th></th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-book>
+      <tr>
+        <td>{{book.title}}</td>
+        <td>{{book.author}}</td>
+        <td>{{book.price}}</td>
+        <td><button pButton type="button" label="Edit" (click)="showEditDialog(book.id)"></button></td>
+
+      </tr>
+    </ng-template>
+  </p-table>
+
+
+</div>
